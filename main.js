@@ -44,7 +44,7 @@
   });
 })();
 
-// Contact form
+// Contact form — submit via Web3Forms then show confirmation
 (function () {
   const form = document.getElementById('contactForm');
   if (!form) return;
@@ -52,10 +52,32 @@
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const btn = form.querySelector('.form-submit');
-    btn.textContent = 'Message Sent!';
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending...';
     btn.disabled = true;
-    btn.style.background = '#1e4d30';
-    btn.style.cursor = 'default';
+
+    const formData = new FormData(form);
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        btn.textContent = 'Message Sent!';
+        btn.style.background = '#1e4d30';
+        btn.style.cursor = 'default';
+        form.reset();
+      } else {
+        btn.textContent = 'Error — Try Again';
+        btn.disabled = false;
+      }
+    })
+    .catch(() => {
+      btn.textContent = 'Error — Try Again';
+      btn.disabled = false;
+    });
   });
 })();
 
