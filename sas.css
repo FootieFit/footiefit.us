@@ -528,3 +528,88 @@
   .sas-promo { letter-spacing: 0.08em; font-size: 0.6875rem; padding: var(--space-2) var(--space-3); gap: var(--space-2); }
   .sas-hero-actions .btn-ghost { width: 100%; }
 }
+
+/* ── MOBILE-ONLY COLLAPSIBLE BLOCKS ──────────────────────── */
+/* Desktop: summaries hidden, all content always visible.
+   Mobile (<=700px): content folds behind tappable summaries. */
+.m-fold { display: contents; }
+.m-fold > .m-fold-summary { display: none; }
+
+@media (max-width: 700px) {
+  .m-fold {
+    display: block;
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+
+  .m-fold > .m-fold-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    color: #fff;
+    padding: var(--space-4) 0;
+    border-top: 1px solid var(--color-divider);
+    border-bottom: 1px solid var(--color-divider);
+    transition: color 0.2s ease;
+    max-width: none;
+  }
+
+  .m-fold > .m-fold-summary::-webkit-details-marker { display: none; }
+  .m-fold > .m-fold-summary::marker { content: ""; }
+  .m-fold > .m-fold-summary:hover,
+  .m-fold > .m-fold-summary:focus-visible { color: var(--color-accent-light); }
+
+  .m-fold > .m-fold-summary::after {
+    content: "";
+    flex: 0 0 auto;
+    width: 8px;
+    height: 8px;
+    margin-right: 3px;
+    border-right: 2px solid var(--color-accent-light);
+    border-bottom: 2px solid var(--color-accent-light);
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform 0.25s ease;
+  }
+
+  .m-fold[open] > .m-fold-summary { border-bottom-color: transparent; }
+  .m-fold[open] > .m-fold-summary::after { transform: rotate(-135deg) translateY(-2px); }
+
+  .m-fold[open] > *:not(.m-fold-summary) { margin-top: var(--space-6); }
+  .m-fold[open] > .sas-steps,
+  .m-fold[open] > .sas-outcomes { margin-bottom: var(--space-2); }
+
+  /* Reduce mobile noise: drop the "What This Is Not" column */
+  .sas-compare-card--not { display: none; }
+  .sas-compare { gap: 0; }
+}
+
+/* Compact schedule rows on phones instead of five tall stacked cards */
+@media (max-width: 620px) {
+  .sas-day {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--space-5);
+    align-items: center;
+    text-align: left;
+    padding: var(--space-5);
+  }
+  .sas-day-name { grid-column: 1; grid-row: 1 / 3; align-self: center; }
+  .sas-day-rule { display: none; }
+  .sas-day-times { grid-column: 2; grid-row: 1; text-align: right; align-items: flex-end; }
+  .sas-day-coach {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: right;
+    margin: var(--space-1) 0 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+}
