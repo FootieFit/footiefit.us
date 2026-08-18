@@ -82,6 +82,7 @@
 .site-logo {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .logo-main {
@@ -127,8 +128,17 @@
               background var(--transition-interactive);
 }
 
+.header-nav a {
+  white-space: nowrap;
+}
+
 .header-nav a:last-child {
   border-right: 1px solid var(--color-divider);
+}
+
+@media (max-width: 1080px) {
+  .header-nav a { padding-inline: var(--space-3); letter-spacing: 0.1em; }
+  .logo-main { height: 46px; }
 }
 
 .header-nav a:hover {
@@ -183,7 +193,7 @@
 
 .mobile-nav.open { display: flex; }
 
-@media (max-width: 768px) {
+@media (max-width: 920px) {
   .header-nav { display: none; }
   .mobile-toggle { display: flex; }
 }
