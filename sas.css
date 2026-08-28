@@ -23,6 +23,14 @@
 
 .sas-hero h1 { max-width: 20ch; }
 
+.hero-note {
+  margin-top: var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  max-width: 46ch;
+}
+
 /* ── AT-A-GLANCE BANNER ──────────────────────────────────── */
 .sas-facts .partnerships-list {
   gap: clamp(var(--space-4), 2.5vw, var(--space-10));
@@ -56,31 +64,7 @@
 .sas-header--center .section-rule { margin-inline: auto; }
 .sas-header--center .section-body { margin-inline: auto; }
 
-/* ── COMPARE (WHY SAS) ───────────────────────────────────── */
-.sas-compare {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-1);
-  margin-top: var(--space-10);
-}
-
-.sas-compare-card {
-  background: var(--color-surface-3);
-  border: 1px solid var(--color-divider);
-  padding: clamp(var(--space-6), 3vw, var(--space-10));
-}
-
-.sas-compare-card--accent { border-left: 2px solid var(--color-accent); }
-
-.sas-compare-card h3 {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: var(--space-4);
-}
-
+/* ── BULLET LIST (used in class-experience section) ──────── */
 .sas-list {
   list-style: none;
   display: flex;
@@ -107,12 +91,68 @@
   background: var(--color-accent-light);
 }
 
-/* ── PROCESS: TEST / TRAIN / RETEST ──────────────────────── */
+/* ── BENEFIT LIST (PROGRAM DESCRIPTION) ──────────────────── */
+.sas-benefits {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4) var(--space-8);
+  max-width: var(--content-wide);
+  margin-inline: auto;
+}
+
+.sas-benefit {
+  position: relative;
+  padding-left: var(--space-8);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: none;
+}
+
+.sas-benefit::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-accent-light);
+  border: 1px solid var(--color-accent-light);
+}
+
+/* ── INLINE CTA ROW ───────────────────────────────────────── */
+.sas-inline-cta {
+  margin-top: clamp(var(--space-8), 4vw, var(--space-12));
+  text-align: center;
+}
+
+/* ── BRAND LINE ───────────────────────────────────────────── */
+.sas-brand-line {
+  margin-top: var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent-light);
+  max-width: none;
+}
+
+/* ── PROCESS: STEP GRIDS ──────────────────────────────────── */
 .sas-steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-1);
 }
+
+.sas-steps--4 { grid-template-columns: repeat(4, 1fr); }
 
 .sas-step {
   background: var(--color-surface-3);
@@ -185,38 +225,7 @@
   max-width: none;
 }
 
-/* ── OUTCOMES ────────────────────────────────────────────── */
-.sas-outcomes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-1);
-}
-
-.sas-outcome {
-  background: var(--color-surface-2);
-  border: 1px solid var(--color-divider);
-  border-left: 2px solid var(--color-accent);
-  padding: clamp(var(--space-6), 3vw, var(--space-8));
-}
-
-.sas-outcome h3 {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: var(--space-3);
-  line-height: 1.15;
-}
-
-.sas-outcome p {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  line-height: 1.7;
-  color: var(--color-text-muted);
-}
-
-/* ── SMALL GROUP SPLIT ───────────────────────────────────── */
+/* ── SMALL GROUP / CLASS EXPERIENCE SPLIT ────────────────── */
 .sas-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -280,91 +289,6 @@
   font-weight: 500;
   text-decoration-thickness: 1px;
 }
-
-.sas-price {
-  display: grid;
-  grid-template-columns: minmax(260px, 340px) 1fr;
-  gap: var(--space-1);
-  align-items: stretch;
-  margin-top: clamp(var(--space-8), 4vw, var(--space-12));
-}
-
-.sas-price-card {
-  background: var(--color-surface-3);
-  border: 1px solid var(--color-divider);
-  border-top: 2px solid var(--color-accent);
-  padding: clamp(var(--space-8), 4vw, var(--space-10));
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.sas-price-label {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-accent-light);
-  margin-bottom: var(--space-4);
-  max-width: none;
-}
-
-.sas-price-figure {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-3);
-}
-
-.sas-price-now {
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  font-weight: 700;
-  color: #fff;
-  line-height: 1;
-}
-
-.sas-price-was {
-  font-family: var(--font-body);
-  font-size: var(--text-lg);
-  font-weight: 500;
-  color: var(--color-text-faint);
-  text-decoration: line-through;
-  text-decoration-thickness: 1px;
-}
-
-.sas-price-note {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  max-width: none;
-}
-
-.sas-price-detail {
-  background: var(--color-surface-3);
-  border: 1px solid var(--color-divider);
-  padding: clamp(var(--space-8), 4vw, var(--space-10));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.sas-price-detail h3 {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: var(--space-4);
-}
-
-.sas-price-detail .btn-ghost { align-self: flex-start; margin-top: var(--space-6); }
 
 /* ── SCHEDULE ────────────────────────────────────────────── */
 .sas-schedule {
@@ -507,23 +431,18 @@
 /* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 1000px) {
   .sas-schedule { grid-template-columns: repeat(3, 1fr); }
-  .sas-outcomes { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 860px) {
-  .sas-price { grid-template-columns: 1fr; }
+  .sas-steps--4 { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 800px) {
   .sas-steps { grid-template-columns: 1fr; }
-  .sas-compare { grid-template-columns: 1fr; }
   .sas-split { grid-template-columns: 1fr; min-height: auto; }
   .sas-split-image { order: -1; min-height: 320px; }
+  .sas-benefits { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 620px) {
   .sas-schedule { grid-template-columns: 1fr; }
-  .sas-outcomes { grid-template-columns: 1fr; }
   .sas-day { padding: var(--space-6) var(--space-4); }
   .sas-promo { letter-spacing: 0.08em; font-size: 0.6875rem; padding: var(--space-2) var(--space-3); gap: var(--space-2); }
   .sas-hero-actions .btn-ghost { width: 100%; }
@@ -583,12 +502,7 @@
   .m-fold[open] > .m-fold-summary::after { transform: rotate(-135deg) translateY(-2px); }
 
   .m-fold[open] > *:not(.m-fold-summary) { margin-top: var(--space-6); }
-  .m-fold[open] > .sas-steps,
-  .m-fold[open] > .sas-outcomes { margin-bottom: var(--space-2); }
-
-  /* Reduce mobile noise: drop the "What This Is Not" column */
-  .sas-compare-card--not { display: none; }
-  .sas-compare { gap: 0; }
+  .m-fold[open] > .sas-steps { margin-bottom: var(--space-2); }
 }
 
 /* Compact schedule rows on phones instead of five tall stacked cards */

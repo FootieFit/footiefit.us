@@ -65,10 +65,16 @@
     .then(res => res.json())
     .then(data => {
       if (data.success) {
-        btn.textContent = 'Message Sent!';
-        btn.style.background = '#1e4d30';
-        btn.style.cursor = 'default';
         form.reset();
+        const successEl = form.parentElement.querySelector('.form-success');
+        if (successEl) {
+          form.hidden = true;
+          successEl.hidden = false;
+        } else {
+          btn.textContent = 'Message Sent!';
+          btn.style.background = '#1e4d30';
+          btn.style.cursor = 'default';
+        }
       } else {
         btn.textContent = 'Error — Try Again';
         btn.disabled = false;
