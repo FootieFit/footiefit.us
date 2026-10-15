@@ -44,6 +44,13 @@
   });
 })();
 
+// Analytics helper: sends a GA4 event if the Google tag is loaded. Never send names, emails, or phone numbers.
+function ffTrack(name, params) {
+  try {
+    if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+  } catch (err) { /* analytics must never break the page */ }
+}
+
 // Contact form — submit via Web3Forms then show confirmation
 (function () {
   const form = document.getElementById('contactForm');
@@ -65,6 +72,13 @@
     .then(res => res.json())
     .then(data => {
       if (data.success) {
+        const subjectEl = form.querySelector('input[name="subject"]');
+        const trainingEl = form.querySelector('[name="training"]');
+        ffTrack('generate_lead', {
+          form_name: subjectEl ? subjectEl.value : 'Contact form',
+          training_interest: trainingEl && trainingEl.value ? trainingEl.value : '(none)',
+          page_path: window.location.pathname
+        });
         form.reset();
         const successEl = form.parentElement.querySelector('.form-success');
         if (successEl) {
@@ -76,11 +90,13 @@
           btn.style.cursor = 'default';
         }
       } else {
+        ffTrack('form_error', { page_path: window.location.pathname, reason: 'web3forms_rejected' });
         btn.textContent = 'Error — Try Again';
         btn.disabled = false;
       }
     })
     .catch(() => {
+      ffTrack('form_error', { page_path: window.location.pathname, reason: 'network' });
       btn.textContent = 'Error — Try Again';
       btn.disabled = false;
     });
@@ -99,3 +115,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// Track booking/contact button clicks (jumps to the on-page form) and email/phone link clicks
+document.addEventListener('click', function (e) {
+  const link = e.target.closest ? e.target.closest('a') : null;
+  if (!link) return;
+  const href = link.getAttribute('href') || '';
+  const label = (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80);
+  if (href === '#book' || href === '#contact') {
+    ffTrack('cta_click', { cta_text: label, cta_target: href, page_path: window.location.pathname });
+  } else if (href.indexOf('mailto:') === 0 || href.indexOf('tel:') === 0) {
+    ffTrack('contact_click', { method: href.indexOf('tel:') === 0 ? 'phone' : 'email', page_path: window.location.pathname });
+  }
+}, true);
