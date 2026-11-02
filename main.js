@@ -79,6 +79,8 @@ function ffTrack(name, params) {
           training_interest: trainingEl && trainingEl.value ? trainingEl.value : '(none)',
           page_path: window.location.pathname
         });
+        // Meta Pixel lead event (no personal info sent)
+        try { if (typeof window.fbq === 'function') window.fbq('track', 'Lead', { content_name: 'SAS Free Trial' }); } catch (err) {}
         form.reset();
         const successEl = form.parentElement.querySelector('.form-success');
         if (successEl) {
